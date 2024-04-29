@@ -1,0 +1,5 @@
+{
+  "language": "en,ja",
+  "ignorePaths": [".prettierrc", "package-lock.json", ".vscode/**", ".env.**"],
+  "words": ["firestore"]
+}
