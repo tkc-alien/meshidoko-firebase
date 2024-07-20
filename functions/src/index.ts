@@ -1,4 +1,11 @@
 /**
+ * パスのエイリアスを解決する
+ * これ自体にエイリアスを使用できないため、行単位でeslintを無視する
+ */
+// eslint-disable-next-line no-restricted-imports
+import "./paths";
+
+/**
  * Import function triggers from their respective submodules:
  *
  * import {onCall} from "firebase-functions/v2/https";
