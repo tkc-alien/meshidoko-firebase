@@ -15,9 +15,11 @@
   },
   "main": "lib/index.js",
   "dependencies": {
+    "date-fns": "^3.6.0",
     "firebase-admin": "^12.1.0",
     "firebase-functions": "^5.0.0",
-    "module-alias": "^2.2.3"
+    "module-alias": "^2.2.3",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/module-alias": "^2.0.4",
