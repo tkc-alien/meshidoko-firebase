@@ -1,0 +1,15 @@
+{
+  "collectCoverageFrom": [
+    "<rootDir>/src/domain/**.ts",
+    "<rootDir>/src/feature/**/*.function.ts"
+  ],
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "moduleNameMapper": {
+    "^@/(.+)$": "<rootDir>/src/$1"
+  },
+  "testEnvironment": "node",
+  "testRegex": ".*\\.spec\\.ts$",
+  "transform": {
+    "^.+\\.(t|j)sx?$": "ts-jest"
+  }
+}
