@@ -1,27 +1,29 @@
+import { PlacesNearbyRequest } from "@/data/places-nearby";
+
 /**
  * 独自定義エラー
  */
-abstract class AppError extends Error {
+export abstract class AppError extends Error {
   code: string;
-  alert: boolean;
+  internal: boolean;
   details?: unknown;
 
   /**
    * Constructor
    * @param { string } code
-   * @param { should } alert
+   * @param { should } internal
    * @param { string } message
    * @param { unknown } details
    */
   constructor(
     code: string,
-    alert: boolean,
+    internal: boolean,
     message: string,
     details?: unknown
   ) {
     super(message);
     this.code = code;
-    this.alert = alert;
+    this.internal = internal;
     this.details = details;
   }
 }
@@ -34,6 +36,27 @@ export class InvalidEnvironmentError extends AppError {
    */
   constructor(values: unknown) {
     super("invalid-env", true, "環境変数が不正な値です。", values);
+  }
+}
+
+/** プログラム不正エラー */
+export class IllegalStateError extends AppError {
+  /**
+   * Constructor
+   * @param { unknown } details
+   */
+  constructor(details: unknown) {
+    super("illegal-state", true, "想定されないエラーが発生しました。", details);
+  }
+}
+
+/** 認証エラー */
+export class UnauthorizedError extends AppError {
+  /**
+   * Constructor
+   */
+  constructor() {
+    super("unauthoried", false, "認証に失敗しました。");
   }
 }
 
@@ -126,7 +149,7 @@ export class FailedToFetchRestaurantsError extends AppError {
    * @param { string } message
    * @param { object } request
    */
-  constructor(status: string, message: string, request: object) {
+  constructor(status: string, message: string, request: PlacesNearbyRequest) {
     super(
       "failed-to-fetch-restaurans",
       false,
@@ -135,7 +158,7 @@ export class FailedToFetchRestaurantsError extends AppError {
         status,
         message: message,
         request: {
-          ...request,
+          ...request.params,
           key: "HIDDEN BY API", // APIキーを隠す
         },
       }
