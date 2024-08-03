@@ -19,4 +19,4 @@ setGlobalOptions({
 // Firebase初期化
 admin.initializeApp();
 
-export { pickRestaurantFunction } from "@/feature/pick-restaurant/pick-restaurant.function";
+export { getRandomRestaurantFunction as getRandomRestaurant } from "@/feature/get-ramdom-restaurant/get-random-restaurant.function";

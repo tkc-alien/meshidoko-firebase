@@ -1,22 +1,22 @@
 import { CallableRequest } from "firebase-functions/lib/common/providers/https";
 import { onCall } from "firebase-functions/v2/https";
 
-import { PickRestaurantRequestSchema } from "@/feature/pick-restaurant/pick-restaurant.form";
-import { pickRestaurantHandler } from "@/feature/pick-restaurant/pick-restaurant.handler";
+import { GetRandomRestaurantRequestSchema } from "@/feature/get-ramdom-restaurant/get-random-restaurant.form";
+import { getRandomRestaurantHandler } from "@/feature/get-ramdom-restaurant/get-random-restaurant.handler";
 import { execute } from "@/infra/execute";
 import { verify } from "@/infra/verify";
 
 /**
  * 抽選API
  */
-export const pickRestaurantFunction = onCall(
+export const getRandomRestaurantFunction = onCall(
   async (callableRequest: CallableRequest) => {
     return await execute(async () => {
-      const [uid, request] = verify(PickRestaurantRequestSchema, {
+      const [uid, request] = verify(GetRandomRestaurantRequestSchema, {
         auth: callableRequest.auth,
         data: callableRequest.data,
       });
-      const response = await pickRestaurantHandler(uid, request);
+      const response = await getRandomRestaurantHandler(uid, request);
       return JSON.parse(JSON.stringify(response));
     });
   }

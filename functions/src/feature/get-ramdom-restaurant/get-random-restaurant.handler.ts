@@ -14,19 +14,19 @@ import {
   UnavailablePickError,
 } from "@/error/app-errors";
 import {
-  PickRestaurantRequest,
-  PickRestaurantResponse,
-} from "@/feature/pick-restaurant/pick-restaurant.form";
+  GetRandomRestaurantRequest,
+  GetRandomRestaurantResponse,
+} from "@/feature/get-ramdom-restaurant/get-random-restaurant.form";
 
 /**
  * レストラン抽選APIの具体実装
  * @param { UID } uid
- * @param { PickRestaurantRequest } request
+ * @param { GetRandomRestaurantRequest } request
  */
-export const pickRestaurantHandler = async (
+export const getRandomRestaurantHandler = async (
   uid: UID,
-  request: PickRestaurantRequest
-): Promise<PickRestaurantResponse> => {
+  request: GetRandomRestaurantRequest
+): Promise<GetRandomRestaurantResponse> => {
   // 抽選が可能であるかチェックする
   const currentStatus = await getPickStatus({ uid });
   const canPick = checkCanPick({ pickStatus: currentStatus, now: new Date() });
