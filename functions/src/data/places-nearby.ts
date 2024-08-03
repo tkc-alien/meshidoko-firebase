@@ -35,7 +35,7 @@ export type PlacesNearbyResponse = Pick<lib.PlacesNearbyResponse, "status"> & {
 const client = new lib.Client({
   config: {
     validateStatus: (_) => true,
-    raxConfig: { retry: 3, retryDelay: 300 },
+    raxConfig: { retry: 0 },
   },
 });
 

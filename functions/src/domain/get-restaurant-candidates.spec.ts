@@ -2,11 +2,7 @@
  * @jest-environment jsdom
  */
 
-import {
-  Language,
-  PlacesNearbyRanking,
-  Status,
-} from "@googlemaps/google-maps-services-js";
+import { Language, Status } from "@googlemaps/google-maps-services-js";
 
 import * as placesNearby from "@/data/places-nearby";
 import { getRestaurantCandidates } from "@/domain/get-restaurant-candidates";
@@ -734,7 +730,6 @@ describe(sut.name, () => {
           location: [135.1, 35.1],
           radius: 100,
           keyword: "飲食店",
-          rankby: PlacesNearbyRanking.distance,
           language: Language.ja,
         },
       });
@@ -778,7 +773,6 @@ describe(sut.name, () => {
           location: [135.1, 35.1],
           radius: 100,
           keyword: "飲食店",
-          rankby: PlacesNearbyRanking.distance,
           language: Language.ja,
         },
       });
@@ -821,7 +815,6 @@ describe(sut.name, () => {
           location: [135.1, 35.1],
           radius: 100,
           keyword: "飲食店",
-          rankby: PlacesNearbyRanking.distance,
           language: Language.ja,
         },
       });

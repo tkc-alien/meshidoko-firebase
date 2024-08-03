@@ -1,9 +1,6 @@
 import "ts-array-extensions";
 
-import {
-  Language,
-  PlacesNearbyRanking,
-} from "@googlemaps/google-maps-services-js";
+import { Language } from "@googlemaps/google-maps-services-js";
 import { distance } from "@turf/distance";
 import { point } from "@turf/helpers";
 
@@ -56,7 +53,6 @@ export async function getRestaurantCandidates(input: Input): Promise<Output> {
       location: [input.location.latitude, input.location.longitude],
       radius: input.distance,
       keyword: "飲食店",
-      rankby: PlacesNearbyRanking.distance,
       language: Language.ja,
     },
   };
@@ -79,7 +75,7 @@ export async function getRestaurantCandidates(input: Input): Promise<Output> {
   // 最大10回まで次ページをリクエストする
   for (let count = 1; count < 10 && pagetoken; count++) {
     // PlacesAPIのページネーションはすぐに叩くと失敗するので少し待つ
-    await delay(1200);
+    await delay(2000);
     // 次ページを取得
     const request: PlacesNearbyRequest = {
       params: {
