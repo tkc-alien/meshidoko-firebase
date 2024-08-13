@@ -52,7 +52,7 @@ export async function getRestaurantCandidates(input: Input): Promise<Output> {
       key,
       location: [input.location.latitude, input.location.longitude],
       radius: input.distance,
-      keyword: "飲食店",
+      keyword: createKeyword(input),
       language: Language.ja,
     },
   };
@@ -106,6 +106,19 @@ export async function getRestaurantCandidates(input: Input): Promise<Output> {
 
   // 返却
   return candidates;
+}
+
+/**
+ * 検索キーワードを生成する
+ * @param { Input } input
+ * @return { string }
+ */
+function createKeyword(input: Input): string {
+  let keyward = "飲食店";
+  if (input.alcohol === "required") {
+    keyward += "お酒が飲める";
+  }
+  return keyward;
 }
 
 /**
