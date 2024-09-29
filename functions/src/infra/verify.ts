@@ -14,10 +14,7 @@ export type RequestParams = {
  * @param { RequestParams } params
  * @return { [UID, Request] }
  */
-export function verify(
-  as: ZodType,
-  params: RequestParams
-): [UID, z.infer<typeof as>] {
+export function verify(as: ZodType, params: RequestParams): [UID, z.infer<typeof as>] {
   // ユーザ認証
   const uid = params.auth?.uid;
   if (!uid) {

@@ -7,10 +7,7 @@ import { Language, Status } from "@googlemaps/google-maps-services-js";
 import * as placesNearby from "@/data/places-nearby";
 import { getRestaurantCandidates } from "@/domain/get-restaurant-candidates";
 import { AlcoholCondition, PriceCondition } from "@/entity/condition";
-import {
-  FailedToFetchRestaurantsError,
-  InvalidEnvironmentError,
-} from "@/error/app-errors";
+import { FailedToFetchRestaurantsError, InvalidEnvironmentError } from "@/error/app-errors";
 import { baseRestaurant } from "@/util/spec-util";
 
 const baseInput = {
@@ -264,10 +261,7 @@ describe(sut.name, () => {
       const input = { ...baseInput };
       const output = await sut(input);
       // Verify
-      expect(output).toEqual([
-        baseRestaurant,
-        { ...baseRestaurant, imageUrl: undefined },
-      ]);
+      expect(output).toEqual([baseRestaurant, { ...baseRestaurant, imageUrl: undefined }]);
     },
     timeout
   );
@@ -296,10 +290,7 @@ describe(sut.name, () => {
       const input = { ...baseInput };
       const output = await sut(input);
       // Verify
-      expect(output).toEqual([
-        baseRestaurant,
-        { ...baseRestaurant, imageUrl: undefined },
-      ]);
+      expect(output).toEqual([baseRestaurant, { ...baseRestaurant, imageUrl: undefined }]);
     },
     timeout
   );
@@ -330,10 +321,7 @@ describe(sut.name, () => {
       const input = { ...baseInput };
       const output = await sut(input);
       // Verify
-      expect(output).toEqual([
-        baseRestaurant,
-        { ...baseRestaurant, imageUrl: undefined },
-      ]);
+      expect(output).toEqual([baseRestaurant, { ...baseRestaurant, imageUrl: undefined }]);
     },
     timeout
   );
@@ -391,10 +379,7 @@ describe(sut.name, () => {
       const input = { ...baseInput };
       const output = await sut(input);
       // Verify
-      expect(output).toEqual([
-        baseRestaurant,
-        { ...baseRestaurant, priceMin: undefined, priceMax: undefined },
-      ]);
+      expect(output).toEqual([baseRestaurant, { ...baseRestaurant, priceMin: undefined, priceMax: undefined }]);
     },
     timeout
   );
@@ -422,9 +407,7 @@ describe(sut.name, () => {
       const input = { ...baseInput };
       const output = await sut(input);
       // Verify
-      expect(output).toEqual([
-        { ...baseRestaurant, priceMin: undefined, priceMax: undefined },
-      ]);
+      expect(output).toEqual([{ ...baseRestaurant, priceMin: undefined, priceMax: undefined }]);
     },
     timeout
   );
@@ -452,9 +435,7 @@ describe(sut.name, () => {
       const input = { ...baseInput };
       const output = await sut(input);
       // Verify
-      expect(output).toEqual([
-        { ...baseRestaurant, priceMin: undefined, priceMax: 1000 },
-      ]);
+      expect(output).toEqual([{ ...baseRestaurant, priceMin: undefined, priceMax: 1000 }]);
     },
     timeout
   );
@@ -482,9 +463,7 @@ describe(sut.name, () => {
       const input = { ...baseInput };
       const output = await sut(input);
       // Verify
-      expect(output).toEqual([
-        { ...baseRestaurant, priceMin: 1000, priceMax: 2000 },
-      ]);
+      expect(output).toEqual([{ ...baseRestaurant, priceMin: 1000, priceMax: 2000 }]);
     },
     timeout
   );
@@ -512,9 +491,7 @@ describe(sut.name, () => {
       const input = { ...baseInput };
       const output = await sut(input);
       // Verify
-      expect(output).toEqual([
-        { ...baseRestaurant, priceMin: 2000, priceMax: 5000 },
-      ]);
+      expect(output).toEqual([{ ...baseRestaurant, priceMin: 2000, priceMax: 5000 }]);
     },
     timeout
   );
@@ -542,9 +519,7 @@ describe(sut.name, () => {
       const input = { ...baseInput };
       const output = await sut(input);
       // Verify
-      expect(output).toEqual([
-        { ...baseRestaurant, priceMin: 5000, priceMax: undefined },
-      ]);
+      expect(output).toEqual([{ ...baseRestaurant, priceMin: 5000, priceMax: undefined }]);
     },
     timeout
   );
@@ -572,9 +547,7 @@ describe(sut.name, () => {
       const input = { ...baseInput };
       const output = await sut(input);
       // Verify
-      expect(output).toEqual([
-        { ...baseRestaurant, priceMin: undefined, priceMax: undefined },
-      ]);
+      expect(output).toEqual([{ ...baseRestaurant, priceMin: undefined, priceMax: undefined }]);
     },
     timeout
   );
@@ -603,10 +576,7 @@ describe(sut.name, () => {
       const input = { ...baseInput };
       const output = await sut(input);
       // Verify
-      expect(output).toEqual([
-        baseRestaurant,
-        { ...baseRestaurant, priceMin: undefined, priceMax: undefined },
-      ]);
+      expect(output).toEqual([baseRestaurant, { ...baseRestaurant, priceMin: undefined, priceMax: undefined }]);
     },
     timeout
   );
@@ -666,10 +636,7 @@ describe(sut.name, () => {
       const input = { ...baseInput };
       const output = await sut(input);
       // Verify
-      expect(output).toEqual([
-        { ...baseRestaurant },
-        { ...baseRestaurant, id: "test-restaurant-id-2" },
-      ]);
+      expect(output).toEqual([{ ...baseRestaurant }, { ...baseRestaurant, id: "test-restaurant-id-2" }]);
     },
     timeout
   );
@@ -716,9 +683,7 @@ describe(sut.name, () => {
           results: [basePlace],
         },
       };
-      const placesNearbySpy = jest
-        .spyOn(placesNearby, "placesNearby")
-        .mockResolvedValue(mockResponse);
+      const placesNearbySpy = jest.spyOn(placesNearby, "placesNearby").mockResolvedValue(mockResponse);
       // Exercise
       const input = { ...baseInput };
       await sut(input);
@@ -800,9 +765,7 @@ describe(sut.name, () => {
           results: [basePlace],
         },
       };
-      const placesNearbySpy = jest
-        .spyOn(placesNearby, "placesNearby")
-        .mockResolvedValue(mockResponse);
+      const placesNearbySpy = jest.spyOn(placesNearby, "placesNearby").mockResolvedValue(mockResponse);
       // Exercise
       const input = { ...baseInput };
       const output = await sut(input);

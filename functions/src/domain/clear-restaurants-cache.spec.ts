@@ -30,9 +30,7 @@ describe(sut.name, () => {
     };
     await sut(input);
     // Verify
-    expect(
-      await storage().bucket().file("caches/test_cache_1.json").exists()
-    ).toEqual([false]);
+    expect(await storage().bucket().file("caches/test_cache_1.json").exists()).toEqual([false]);
   });
 
   test("成功: キャッシュIDが正常, 対象のファイルが存在しないとき", async () => {
@@ -46,9 +44,7 @@ describe(sut.name, () => {
     };
     await sut(input);
     // Verify
-    expect(
-      await storage().bucket().file("caches/test_cache_4.json").exists()
-    ).toEqual([false]);
+    expect(await storage().bucket().file("caches/test_cache_4.json").exists()).toEqual([false]);
   });
 
   test("成功: キャッシュIDが正常, ファイルがひとつも存在しないとき", async () => {
@@ -58,9 +54,7 @@ describe(sut.name, () => {
     };
     await sut(input);
     // Verify
-    expect(
-      await storage().bucket().file("caches/test_cache_4.json").exists()
-    ).toEqual([false]);
+    expect(await storage().bucket().file("caches/test_cache_4.json").exists()).toEqual([false]);
   });
 
   test("エラー InvalidArgumentError: キャッシュIDが空文字のとき", async () => {

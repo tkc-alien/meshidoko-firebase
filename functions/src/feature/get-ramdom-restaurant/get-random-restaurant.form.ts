@@ -1,15 +1,9 @@
 import { z } from "zod";
 
-import {
-  AlcoholConditionSchema,
-  DistanceConditionSchema,
-  PriceConditionSchema,
-} from "@/entity/condition";
+import { AlcoholConditionSchema, DistanceConditionSchema, PriceConditionSchema } from "@/entity/condition";
 import { RestaurantSchema } from "@/entity/restaurant";
 
-export type GetRandomRestaurantRequest = z.infer<
-  typeof GetRandomRestaurantRequestSchema
->;
+export type GetRandomRestaurantRequest = z.infer<typeof GetRandomRestaurantRequestSchema>;
 export const GetRandomRestaurantRequestSchema = z.object({
   location: z.object({
     latitude: z.number().min(-90).max(90),
@@ -20,9 +14,7 @@ export const GetRandomRestaurantRequestSchema = z.object({
   prices: z.array(PriceConditionSchema).optional(),
 });
 
-export type GetRandomRestaurantResponse = z.infer<
-  typeof GetRandomRestaurantResponseSchema
->;
+export type GetRandomRestaurantResponse = z.infer<typeof GetRandomRestaurantResponseSchema>;
 export const GetRandomRestaurantResponseSchema = z.object({
   data: RestaurantSchema,
   nextAvailableAt: z.date(),

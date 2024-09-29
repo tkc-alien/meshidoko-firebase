@@ -15,12 +15,7 @@ export abstract class AppError extends Error {
    * @param { string } message
    * @param { unknown } details
    */
-  constructor(
-    code: string,
-    internal: boolean,
-    message: string,
-    details?: unknown
-  ) {
+  constructor(code: string, internal: boolean, message: string, details?: unknown) {
     super(message);
     this.code = code;
     this.internal = internal;
@@ -132,12 +127,7 @@ export class NoRestarantsError extends AppError {
    * @param { unknown } conditions
    */
   constructor(conditions: unknown) {
-    super(
-      "no-restaurants",
-      false,
-      "指定された条件でレストランが見つかりませんでした。",
-      { conditions }
-    );
+    super("no-restaurants", false, "指定された条件でレストランが見つかりませんでした。", { conditions });
   }
 }
 
@@ -150,18 +140,13 @@ export class FailedToFetchRestaurantsError extends AppError {
    * @param { object } request
    */
   constructor(status: string, message: string, request: PlacesNearbyRequest) {
-    super(
-      "failed-to-fetch-restaurans",
-      false,
-      "レストランの取得に失敗しました。",
-      {
-        status,
-        message: message,
-        request: {
-          ...request.params,
-          key: "HIDDEN BY API", // APIキーを隠す
-        },
-      }
-    );
+    super("failed-to-fetch-restaurans", false, "レストランの取得に失敗しました。", {
+      status,
+      message: message,
+      request: {
+        ...request.params,
+        key: "HIDDEN BY API", // APIキーを隠す
+      },
+    });
   }
 }

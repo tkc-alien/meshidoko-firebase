@@ -30,11 +30,7 @@ export async function setPickStatus(input: Input): Promise<Output> {
   };
   const data = JSON.parse(JSON.stringify(pickStatus));
   // データ更新
-  await getDatabase()
-    .ref("users")
-    .child(input.uid)
-    .child("pickStatus")
-    .set(data);
+  await getDatabase().ref("users").child(input.uid).child("pickStatus").set(data);
   // 返却
   return pickStatus;
 }

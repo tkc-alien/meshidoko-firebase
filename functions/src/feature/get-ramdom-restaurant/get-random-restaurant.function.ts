@@ -9,15 +9,13 @@ import { verify } from "@/infra/verify";
 /**
  * 抽選API
  */
-export const getRandomRestaurantFunction = onCall(
-  async (callableRequest: CallableRequest) => {
-    return await execute(async () => {
-      const [uid, request] = verify(GetRandomRestaurantRequestSchema, {
-        auth: callableRequest.auth,
-        data: callableRequest.data,
-      });
-      const response = await getRandomRestaurantHandler(uid, request);
-      return JSON.parse(JSON.stringify(response));
+export const getRandomRestaurantFunction = onCall(async (callableRequest: CallableRequest) => {
+  return await execute(async () => {
+    const [uid, request] = verify(GetRandomRestaurantRequestSchema, {
+      auth: callableRequest.auth,
+      data: callableRequest.data,
     });
-  }
-);
+    const response = await getRandomRestaurantHandler(uid, request);
+    return JSON.parse(JSON.stringify(response));
+  });
+});

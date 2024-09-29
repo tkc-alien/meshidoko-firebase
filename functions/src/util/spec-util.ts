@@ -62,8 +62,7 @@ export const baseRestaurant: Restaurant = {
   id: "test-restaurant-id",
   name: "Test Restaurant",
   mapUrl: "https://www.google.com/maps/search/?api=1&query=Test Restaurant",
-  imageUrl:
-    "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=test-photo-reference-1",
+  imageUrl: "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=test-photo-reference-1",
   latitude: 135.1,
   longitude: 35.1,
   distance: 0,

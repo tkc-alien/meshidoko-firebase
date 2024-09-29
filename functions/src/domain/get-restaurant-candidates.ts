@@ -4,22 +4,10 @@ import { Language } from "@googlemaps/google-maps-services-js";
 import { distance } from "@turf/distance";
 import { point } from "@turf/helpers";
 
-import {
-  AddressGeometry,
-  PlaceData,
-  placesNearby,
-  PlacesNearbyRequest,
-} from "@/data/places-nearby";
-import {
-  AlcoholCondition,
-  DistanceCondition,
-  PriceCondition,
-} from "@/entity/condition";
+import { AddressGeometry, PlaceData, placesNearby, PlacesNearbyRequest } from "@/data/places-nearby";
+import { AlcoholCondition, DistanceCondition, PriceCondition } from "@/entity/condition";
 import { Restaurant, RestaurantSchema } from "@/entity/restaurant";
-import {
-  FailedToFetchRestaurantsError,
-  InvalidEnvironmentError,
-} from "@/error/app-errors";
+import { FailedToFetchRestaurantsError, InvalidEnvironmentError } from "@/error/app-errors";
 import { delay } from "@/util/async-utils";
 
 type Input = {
@@ -59,15 +47,11 @@ export async function getRestaurantCandidates(input: Input): Promise<Output> {
   const response = await placesNearby(request);
   // レスポンス解析
   if (response.data.status !== "OK") {
-    throw new FailedToFetchRestaurantsError(
-      response.data.status,
-      response.data.error_message,
-      request
-    );
+    throw new FailedToFetchRestaurantsError(response.data.status, response.data.error_message, request);
   }
   // 初回コールの結果をレストラン情報に変換して保持する
-  let candidates: Restaurant[] = response.data.results.compactMap(
-    (element, _i, _a) => convert(element, input.location)
+  let candidates: Restaurant[] = response.data.results.compactMap((element, _i, _a) =>
+    convert(element, input.location)
   );
 
   // 次ページのトークン
@@ -87,18 +71,12 @@ export async function getRestaurantCandidates(input: Input): Promise<Output> {
     const response = await placesNearby(request);
     // レスポンス解析
     if (response.data.status !== "OK") {
-      throw new FailedToFetchRestaurantsError(
-        response.data.status,
-        response.data.error_message,
-        request
-      );
+      throw new FailedToFetchRestaurantsError(response.data.status, response.data.error_message, request);
     }
     // 次ページの結果をレストラン情報に変換して保持する
     candidates = [
       ...candidates,
-      ...response.data.results.compactMap((element, _i, _a) =>
-        convert(element, input.location)
-      ),
+      ...response.data.results.compactMap((element, _i, _a) => convert(element, input.location)),
     ];
     // 次ページを更新
     pagetoken = response.data.next_page_token;
@@ -198,9 +176,7 @@ function convertDistance(
  * @param { number? } priceLevel
  * @return { object | undefined }
  */
-function convertPrice(
-  priceLevel?: number
-): { min?: number; max?: number } | undefined {
+function convertPrice(priceLevel?: number): { min?: number; max?: number } | undefined {
   // TODO 値は仮置きなのでちゃんと確認する
   if (priceLevel !== undefined) {
     switch (priceLevel) {

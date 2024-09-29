@@ -8,11 +8,7 @@ import { pickRestaurant } from "@/domain/pick-restaurant";
 import { setPickStatus } from "@/domain/set-pick-status";
 import { storeRestaurantsCache } from "@/domain/store-restaurants-cache";
 import { UID } from "@/entity/user";
-import {
-  IllegalStateError,
-  NoRestarantsError,
-  UnavailablePickError,
-} from "@/error/app-errors";
+import { IllegalStateError, NoRestarantsError, UnavailablePickError } from "@/error/app-errors";
 import {
   GetRandomRestaurantRequest,
   GetRandomRestaurantResponse,
@@ -32,13 +28,9 @@ export const getRandomRestaurantHandler = async (
   const canPick = checkCanPick({ pickStatus: currentStatus, now: new Date() });
   if (!canPick) {
     if (currentStatus) {
-      throw new UnavailablePickError(
-        getNextAvailableDate({ pickStatus: currentStatus })
-      );
+      throw new UnavailablePickError(getNextAvailableDate({ pickStatus: currentStatus }));
     } else {
-      throw new IllegalStateError(
-        "抽選ステータスがundefinedであるのに抽選が拒否されています。"
-      );
+      throw new IllegalStateError("抽選ステータスがundefinedであるのに抽選が拒否されています。");
     }
   }
 

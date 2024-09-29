@@ -27,9 +27,7 @@ describe(sut.name, () => {
     const output = sut(input);
     // Verify
     const isContained =
-      output?.id === "test-restaurant-1" ||
-      output?.id === "test-restaurant-2" ||
-      output?.id === "test-restaurant-3";
+      output?.id === "test-restaurant-1" || output?.id === "test-restaurant-2" || output?.id === "test-restaurant-3";
     expect(isContained).toEqual(true);
   });
 

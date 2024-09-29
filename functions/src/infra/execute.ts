@@ -7,9 +7,7 @@ import { AppError } from "@/error/app-errors";
  * Functionの処理を安全に実行する
  * @param { function } handler
  */
-export async function execute(
-  handler: () => Promise<unknown>
-): Promise<unknown> {
+export async function execute(handler: () => Promise<unknown>): Promise<unknown> {
   try {
     return await handler();
   } catch (e) {

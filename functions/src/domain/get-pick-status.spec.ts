@@ -3,12 +3,7 @@ import { database } from "firebase-admin";
 import { getPickStatus } from "@/domain/get-pick-status";
 import { PickStatus } from "@/entity/pick-status";
 import { InvalidArgumentError } from "@/error/app-errors";
-import {
-  basePickStatus,
-  basePickStatusData,
-  setup,
-  teardown,
-} from "@/util/spec-util";
+import { basePickStatus, basePickStatusData, setup, teardown } from "@/util/spec-util";
 
 const sut = getPickStatus;
 

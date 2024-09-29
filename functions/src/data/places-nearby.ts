@@ -20,10 +20,7 @@ export type PlaceData = {
 
 export type Place = Partial<PlaceData>;
 
-export type PlacesNearbyResponseData = Omit<
-  lib.PlacesNearbyResponseData,
-  "results"
-> & {
+export type PlacesNearbyResponseData = Omit<lib.PlacesNearbyResponseData, "results"> & {
   results: Place[];
 };
 
@@ -39,8 +36,6 @@ const client = new lib.Client({
   },
 });
 
-export const placesNearby = (
-  request: PlacesNearbyRequest
-): Promise<PlacesNearbyResponse> => {
+export const placesNearby = (request: PlacesNearbyRequest): Promise<PlacesNearbyResponse> => {
   return client.placesNearby(request);
 };
