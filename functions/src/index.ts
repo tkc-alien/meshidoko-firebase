@@ -20,3 +20,4 @@ setGlobalOptions({
 admin.initializeApp();
 
 export { getRandomRestaurantFunction as getRandomRestaurant } from "@/feature/get-ramdom-restaurant/get-random-restaurant.function";
+export { registerRewardFunction as registerReward } from "@/feature/register-reward/register-reward.function";

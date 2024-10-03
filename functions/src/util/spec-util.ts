@@ -1,4 +1,4 @@
-import { PickStatus, UsedReward } from "@/entity/pick-status";
+import { EarnedReward, PickStatus, UsedReward } from "@/entity/pick-status";
 import { Restaurant } from "@/entity/restaurant";
 import admin = require("firebase-admin");
 
@@ -28,6 +28,11 @@ export async function teardown() {
   await admin.app().delete();
 }
 
+export const baseEarnedReward: EarnedReward = {
+  rewardId: "test-reward-id",
+  earnedAt: new Date("2000-01-01T03:00:00Z"),
+};
+
 export const baseUsedReward: UsedReward = {
   rewardId: "test-reward-id",
   usedAt: new Date("2000-01-01T03:00:00Z"),
@@ -36,10 +41,7 @@ export const baseUsedReward: UsedReward = {
 export const basePickStatus: PickStatus = {
   cacheId: "test-cache-id",
   pickedAt: new Date("2000-01-01T03:00:00Z"),
-  earnedReward: {
-    rewardId: "test-reward-id",
-    earnedAt: new Date("2000-01-01T03:00:00Z"),
-  },
+  earnedReward: baseEarnedReward,
   usedRewards: [baseUsedReward],
 };
 

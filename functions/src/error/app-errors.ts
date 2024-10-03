@@ -120,6 +120,16 @@ export class UnavailablePickError extends AppError {
   }
 }
 
+/** リワード獲得不許可エラー */
+export class UnavailableEarnRewardError extends AppError {
+  /**
+   * Constructor
+   */
+  constructor() {
+    super("unavailable-earn-reward", false, "リワード獲得が許可されませんでした。", {});
+  }
+}
+
 /** レストラン不存在エラー */
 export class NoRestarantsError extends AppError {
   /**
