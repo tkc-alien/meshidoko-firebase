@@ -1,11 +1,11 @@
 import { database } from "firebase-admin";
 import { Reference } from "firebase-admin/database";
 
-import { setEarnedReward } from "@/domain/set-earned-reward";
+import { setUsedRewards } from "@/domain/set-used-rewards";
 import { InvalidArgumentError } from "@/error/app-errors";
-import { baseEarnedReward, setup, teardown } from "@/util/spec-util";
+import { baseUsedReward, setup, teardown } from "@/util/spec-util";
 
-const sut = setEarnedReward;
+const sut = setUsedRewards;
 
 describe(sut.name, () => {
   /** テストデータを格納するリファレンス */
@@ -13,7 +13,7 @@ describe(sut.name, () => {
 
   beforeAll(async () => {
     await setup();
-    sutRef = database().ref("users/test-uid/pickStatus/earnedReward");
+    sutRef = database().ref("users/test-uid/pickStatus/usedRewards");
   });
 
   beforeEach(async () => {
@@ -28,16 +28,18 @@ describe(sut.name, () => {
     // Exercise
     const input = {
       uid: "test-uid",
-      earnedReward: baseEarnedReward,
+      usedRewards: [baseUsedReward],
     };
     await sut(input);
     // Verify
     const snapshot = await sutRef.get();
     expect(snapshot.exists()).toEqual(true);
-    expect(snapshot.val()).toEqual({
-      rewardId: "test-reward-id",
-      earnedAt: "2000-01-01T03:00:00.000Z",
-    });
+    expect(snapshot.val()).toEqual([
+      {
+        rewardId: "test-reward-id",
+        usedAt: "2000-01-01T03:00:00.000Z",
+      },
+    ]);
   });
 
   test("成功: 既存データがあるとき", async () => {
@@ -46,25 +48,27 @@ describe(sut.name, () => {
     // Exercise
     const input = {
       uid: "test-uid",
-      earnedReward: baseEarnedReward,
+      usedRewards: [baseUsedReward],
     };
     await sut(input);
     // Verify
     const snapshot = await sutRef.get();
     expect(snapshot.exists()).toEqual(true);
-    expect(snapshot.val()).toEqual({
-      rewardId: "test-reward-id",
-      earnedAt: "2000-01-01T03:00:00.000Z",
-    });
+    expect(snapshot.val()).toEqual([
+      {
+        rewardId: "test-reward-id",
+        usedAt: "2000-01-01T03:00:00.000Z",
+      },
+    ]);
   });
 
-  test("成功: earnedAtがundefinedのとき", async () => {
+  test("成功: usedRewardsがundefinedのとき", async () => {
     // Setup
     await sutRef.set({ key: "value" });
     // Exercise
     const input = {
       uid: "test-uid",
-      earnedReward: undefined, // condition
+      usedRewards: undefined, // condition
     };
     await sut(input);
     // Verify
@@ -77,7 +81,7 @@ describe(sut.name, () => {
     // Exercise
     const input = {
       uid: "", // condition
-      earnedReward: baseEarnedReward,
+      usedRewards: [baseUsedReward],
     };
     // Verify
     expect(sut(input)).rejects.toThrow(InvalidArgumentError);
@@ -85,14 +89,16 @@ describe(sut.name, () => {
     expect(snapshot.exists()).toEqual(false);
   });
 
-  test("エラー InvalidArgumentError: earnedReward.rewardIdが空文字のとき", async () => {
+  test("エラー InvalidArgumentError: usedReward.rewardIdが空文字のとき", async () => {
     // Exercise
     const input = {
       uid: "test-uid",
-      earnedReward: {
-        ...baseEarnedReward,
-        rewardId: "", // condition
-      },
+      usedRewards: [
+        {
+          ...baseUsedReward,
+          rewardId: "", // condition
+        },
+      ],
     };
     // Verify
     expect(sut(input)).rejects.toThrow(InvalidArgumentError);

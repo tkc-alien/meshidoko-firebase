@@ -130,6 +130,16 @@ export class UnavailableEarnRewardError extends AppError {
   }
 }
 
+/** リワード使用不許可エラー */
+export class UnavailableUseRewardError extends AppError {
+  /**
+   * Constructor
+   */
+  constructor() {
+    super("unavailable-use-reward", false, "リワード使用が許可されませんでした。", {});
+  }
+}
+
 /** レストラン不存在エラー */
 export class NoRestarantsError extends AppError {
   /**

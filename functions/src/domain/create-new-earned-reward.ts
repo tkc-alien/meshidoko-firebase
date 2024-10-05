@@ -14,9 +14,8 @@ export type Output = EarnedReward;
  * @return { EarnedReward }
  */
 export function createNewEarnedReward(input: Input): Output {
-  const earnedReward: EarnedReward = {
+  return {
     rewardId: ulid(),
     earnedAt: input.now,
   };
-  return earnedReward;
 }

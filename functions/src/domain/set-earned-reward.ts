@@ -6,7 +6,7 @@ import { InvalidArgumentError } from "@/error/app-errors";
 
 export type Input = {
   uid: UID;
-  earnedReward: EarnedReward;
+  earnedReward: EarnedReward | undefined;
 };
 
 export type Output = void;
@@ -17,10 +17,10 @@ export type Output = void;
  */
 export async function setEarnedReward(input: Input): Promise<Output> {
   // 入力値チェック
-  if (input.uid.length === 0 || input.earnedReward.rewardId.length === 0) {
+  if (input.uid.length === 0 || input.earnedReward?.rewardId.length === 0) {
     throw new InvalidArgumentError(input);
   }
   // データ更新
-  const data = JSON.parse(JSON.stringify(input.earnedReward));
+  const data = input.earnedReward === undefined ? {} : JSON.parse(JSON.stringify(input.earnedReward));
   await getDatabase().ref("users").child(input.uid).child("pickStatus").child("earnedReward").set(data);
 }

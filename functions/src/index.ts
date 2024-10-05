@@ -19,5 +19,6 @@ setGlobalOptions({
 // Firebase初期化
 admin.initializeApp();
 
+export { consumeRewardFunction as consumeReward } from "@/feature/consume-reward/consume-reward.function";
 export { getRandomRestaurantFunction as getRandomRestaurant } from "@/feature/get-ramdom-restaurant/get-random-restaurant.function";
 export { registerRewardFunction as registerReward } from "@/feature/register-reward/register-reward.function";
